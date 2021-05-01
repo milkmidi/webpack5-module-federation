@@ -1,0 +1,25 @@
+import React from 'react';
+
+// html script 的話，要自己手動 init
+/* window['app1'].init({
+  react: {
+    '17.0.2': {
+      get: () => Promise.resolve().then(() => () => require('react')),
+      // loaded: true,
+    },
+  },
+}); */
+
+const Header = React.lazy(() =>
+  window['app1'].get('./Header').then((factory) => factory())
+);
+
+// const Header = React.lazy(() => import("app1/Header"));
+
+export default () => (
+  <div>
+    <React.Suspense fallback='Loading header'>
+      <Header initCount={10} />
+    </React.Suspense>
+  </div>
+);
