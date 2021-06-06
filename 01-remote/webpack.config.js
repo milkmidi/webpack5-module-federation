@@ -1,9 +1,9 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {
-  ModuleFederationPlugin
-} = require("webpack").container;
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require("path");
 const deps = require('./package.json').dependencies;
+
+// https://www.qiyuandi.com/zhanzhang/zonghe/12450.html
 
 module.exports = {
   entry: {
@@ -13,6 +13,7 @@ module.exports = {
   devtool: false,
   output: {
     publicPath: "http://localhost:9527/",
+    chunkFilename: 'remote-[name].js',
   },
   module: {
     rules: [{
@@ -20,7 +21,11 @@ module.exports = {
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-react"]
+          presets: [
+            ["@babel/preset-react", {
+              // "runtime": "automatic"
+            }]
+          ]
         },
       },
       {
@@ -43,18 +48,16 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "app1",
       // library: { type: "var", name: "app1" },
-      /* library: {
-        type: "umd",
-        name: "app1"
-      }, */
+      // library: { type: "umd", name: "app1" },
       filename: "remoteEntry.js",
+      remotes: {
+        app1: "app1",
+      },
       exposes: {
         // expose each component
         "./Header": "./src/components/Header",
         "./Footer": "./src/components/Footer",
-        "./MyModel": "./src/libs/MyModel",
-        "./useCounter": "./src/hooks/useCounter",
-        "./NameContextProvider": "./src/context/NameContextProvider",
+        "./MyModel": "./src/libs/MyModel"
       },
       /* shared: {
         react: {
@@ -70,22 +73,28 @@ module.exports = {
         },
       } */
       shared: {
-        ...deps,
+        ...deps, // 這個加了比較好
+        /* 
+        '@emotion/css' :{
+          // eager: true,
+        }, */
         react: {
-          // eager: true, // 加了這個其他的都不好載入，但本機就不需要 bootstrap.jsx
+          // eager: true, // 這不要開，因為設定 ture 的話，會先把有用到的 node_modules 都先包裡來
           singleton: true,
+          strictVersion: true,
           requiredVersion: deps.react,
         },
         'react-dom': {
           // eager: true,
           singleton: true,
+          strictVersion: true,
           requiredVersion: deps['react-dom'],
         }
       },
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      chunks: ['vendors', 'app']
+      // chunks: ['vendors', 'app']
     }),
   ],
   devServer: {
@@ -93,10 +102,13 @@ module.exports = {
     port: 9527,
   },
   // https://webpack.js.org/configuration/optimization/
+
+   // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
   optimization: {
     minimize: false,
     moduleIds: 'named',
     chunkIds: 'named',
+    /*
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
@@ -109,5 +121,6 @@ module.exports = {
         },
       },
     },
+    //*/
   },
 };

@@ -8,7 +8,7 @@ module.exports = {
   mode: "development",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
-    port: 3000,
+    port: 3001,
   },
   output: {
     publicPath: "/",
@@ -44,18 +44,19 @@ module.exports = {
       shared: {
         ...deps,
         react: {
-          eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
+          // eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
           singleton: true,
           requiredVersion: deps.react,
         },
         'react-dom': {
-          eager: true,
+          // eager: true,
           singleton: true,
           requiredVersion: deps['react-dom'],
         }
       },
     }),
   ],
+  /*
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -70,4 +71,5 @@ module.exports = {
       },
     },
   },
+  //*/
 };

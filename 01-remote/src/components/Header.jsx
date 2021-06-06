@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { css } from '@emotion/css';
 
 const style = css`
   font-family: Arial, Helvetica, sans-serif;
-  border: 2px solid black;
+  border: 3px solid #27ae60;
   padding: 10px;
   background-color: #2ecc71;
   color: white;
@@ -15,11 +15,12 @@ const style = css`
   button {
     font-size: 20px;
     font-weight: bold;
+    padding: 2px 10px;
   }
 `;
 
 const Header = (props) => {
-  const [count, setCount] = useState(props.initCount || 0);
+  const [count, setCount] = React.useState(props.initCount || 0);
 
   React.useEffect(() => {
     const timeId = setInterval(() => {
@@ -31,8 +32,7 @@ const Header = (props) => {
   }, []);
   return (
     <header className={style}>
-      <h2>Header:9527</h2>
-      <h3>count:{count}</h3>
+      <h2>Header, count:{count}</h2>
       <button onClick={()=> setCount(count+1)}>increment</button>
       {
         props.children

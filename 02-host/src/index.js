@@ -1,3 +1,6 @@
+
+// const MyModel = await import('app1/MyModel');
+
 import("./bootstrap");
 
 // import App from "./components/App";

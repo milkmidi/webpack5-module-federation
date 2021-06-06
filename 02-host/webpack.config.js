@@ -1,12 +1,15 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ModuleFederationPlugin } = require("webpack").container;
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require("path");
 const deps = require('./package.json').dependencies;
 
 // https://github.com/nsebhastian/module-federation-react/blob/app2-complete/app2/webpack.config.js
 module.exports = {
-  entry: "./src/index",
+  entry: {
+    hostMain : "./src/index",
+  },
   mode: "development",
+  devtool: false,
   output: {
     publicPath: "/",
   },
@@ -43,13 +46,15 @@ module.exports = {
       shared: {
         ...deps,
         react: {
-          eager: true, // 加不加都沒差
+          eager: true, // host 端加不加都沒差
           singleton: true,
+          strictVersion: true,
           requiredVersion: deps.react,
         },
         'react-dom': {
           eager: true,
           singleton: true,
+          strictVersion: true,
           requiredVersion: deps['react-dom'],
         }
       },
@@ -62,6 +67,8 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     port: 3000,
   },
+  
+  /*
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -76,4 +83,5 @@ module.exports = {
       },
     },
   },
+  // */
 };

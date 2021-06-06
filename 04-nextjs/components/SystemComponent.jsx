@@ -29,4 +29,4 @@ const SystemComponent = (props) => {
   )
 }
 
-export default React.memo(SystemComponent, () => true)
+export default React.memo(SystemComponent)
