@@ -46,13 +46,13 @@ module.exports = {
       shared: {
         ...deps,
         react: {
-          eager: true, // host 端加不加都沒差
+          // eager: true, // host 端加不加都沒差
           singleton: true,
           strictVersion: true,
           requiredVersion: deps.react,
         },
         'react-dom': {
-          eager: true,
+          // eager: true,
           singleton: true,
           strictVersion: true,
           requiredVersion: deps['react-dom'],
