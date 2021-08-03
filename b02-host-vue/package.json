@@ -1,12 +1,8 @@
 {
-  "name": "module-federation-starter",
+  "name": "module-federation-vue",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve --mode production",
-    "start:watch": "webpack --mode development --watch",
-    "build": "rimraf ./dist && webpack --mode production",
-    "serve": "serve dist -p 9527",
-    "deploy": "rimraf ./dist && npm run build && npm run serve"
+    "start": "webpack serve --mode production"
   },
   "dependencies": {
     "lodash": "^4.17.21",
@@ -14,7 +10,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.14.3",
-    "@vue/babel-plugin-jsx": "^1.0.6",
+    "@babel/preset-react": "7.13.13",
     "@vue/compiler-sfc": "^3.1.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "8.2.2",

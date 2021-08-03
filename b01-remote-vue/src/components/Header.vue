@@ -2,8 +2,14 @@
 import { ref } from 'vue';
 
 export default {
-  setup() {
-    const value = ref(0);
+  props: {
+    initValue: {
+      type: Number,
+      default: 0,
+    },
+  },
+  setup(props) {
+    const value = ref(props.initValue);
     return {
       value,
     };
@@ -24,5 +30,6 @@ export default {
 .header {
   border: 2px solid black;
   padding: 5px;
+  background-color: #1abc9c;
 }
 </style>

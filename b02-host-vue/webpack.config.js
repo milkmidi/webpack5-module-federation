@@ -13,7 +13,7 @@ module.exports = {
   mode: 'development',
   devtool: false,
   output: {
-    publicPath: 'http://localhost:9527/',
+    publicPath: '/',
     chunkFilename: 'remote-[name].js',
   },
   module: {
@@ -29,6 +29,13 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        options: {
+          presets: [
+            ['@babel/preset-react', {
+              // "runtime": "automatic"
+            }],
+          ],
+        },
       },
       {
         test: /\.css?$/,
@@ -44,37 +51,14 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
   },
   plugins: [
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
-      name: 'app1',
-      // library: { type: "var", name: "app1" },
-      // library: { type: "umd", name: "app1" },
-      filename: 'remoteEntry.js',
       remotes: {
-        app1: 'app1',
+        app1: 'app1@http://localhost:9527/remoteEntry.js',
       },
-      exposes: {
-        // expose each component
-        './Header': './src/components/Header.vue',
-        './Button': './src/components/Button',
-        './MyModel': './src/libs/MyModel',
-      },
-      /* shared: {
-        react: {
-          requiredVersion: deps.react,
-          import: 'react', // the "react" package will be used a provided and fallback module
-          shareKey: 'react', // under this name the shared module will be placed in the share scope
-          shareScope: 'default', // share scope with this name will be used
-          singleton: true, // only a single version of the shared module is allowed
-        },
-        'react-dom': {
-          requiredVersion: deps['react-dom'],
-          singleton: true, // only a single version of the shared module is allowed
-        },
-      } */
       shared: {
         ...deps, // 這個加了比較好
         vue: {
@@ -87,23 +71,15 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      // chunks: ['vendors', 'app']
     }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9527,
+    port: 3000,
     hot: true,
     host: '0.0.0.0',
   },
-  // https://webpack.js.org/configuration/optimization/
-
-  // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
   optimization: {
-    minimize: false,
-    moduleIds: 'named',
-    chunkIds: 'named',
-    /*
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
@@ -116,6 +92,5 @@ module.exports = {
         },
       },
     },
-    // */
   },
 };
