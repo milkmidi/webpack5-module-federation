@@ -1,8 +1,8 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const path = require('path');
 const deps = require('./package.json').dependencies;
-
+const federationConfig = require('./federation.config.json');
 // https://www.qiyuandi.com/zhanzhang/zonghe/12450.html
 
 module.exports = {
@@ -10,36 +10,29 @@ module.exports = {
     app: "./src/index",
   }, */
   // mode: "production",
-  mode: "development",
+  mode: 'development',
   devtool: false,
   output: {
-    publicPath: "http://localhost:9527/",
+    publicPath: 'http://localhost:9527/',
     chunkFilename: 'remote-[name].js',
   },
   module: {
     rules: [{
-        test: /\.jsx?$/,
-        loader: "babel-loader",
-        exclude: /node_modules/,
-        options: {
-          presets: [
-            ["@babel/preset-react", {
-              // "runtime": "automatic"
-            }]
-          ]
-        },
+      test: /\.(jsx|js|ts|tsx)?$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/,
+    },
+    {
+      test: /\.css?$/,
+      use: [{
+        loader: 'style-loader',
       },
       {
-        test: /\.css?$/,
-        use: [{
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          }
-        ],
-        exclude: /node_modules/,
+        loader: 'css-loader',
       },
+      ],
+      exclude: /node_modules/,
+    },
     ],
   },
   resolve: {
@@ -47,19 +40,12 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "app1",
+      ...federationConfig,
       // library: { type: "var", name: "app1" },
       // library: { type: "umd", name: "app1" },
-      filename: "remoteEntry.js",
+      filename: 'remoteEntry.js',
       remotes: {
-        app1: "app1",
-      },
-      exposes: {
-        // expose each component
-        "./Header": "./src/components/Header",
-        "./Footer": "./src/components/Footer",
-        "./EmotionReactComponent": "./src/components/EmotionReactComponent",
-        "./MyModel": "./src/libs/MyModel"
+        app1: 'app1',
       },
       /* shared: {
         react: {
@@ -97,21 +83,21 @@ module.exports = {
           singleton: true,
           // strictVersion: true,
           requiredVersion: deps['react-dom'],
-        }
+        },
       },
     }),
-    /* new HtmlWebpackPlugin({
-      template: "./public/index.html",
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
       // chunks: ['vendors', 'app']
-    }), */
+    }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     port: 9527,
   },
   // https://webpack.js.org/configuration/optimization/
 
-   // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
+  // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
   optimization: {
     minimize: false,
     moduleIds: 'named',
@@ -129,6 +115,6 @@ module.exports = {
         },
       },
     },
-    //*/
+    // */
   },
 };

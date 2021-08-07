@@ -1,17 +1,17 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+const path = require('path');
 const deps = require('./package.json').dependencies;
 
 // https://github.com/nsebhastian/module-federation-react/blob/app2-complete/app2/webpack.config.js
 module.exports = {
   entry: {
-    hostMain : "./src/index",
+    hostMain: './src/index',
   },
-  mode: "development",
+  mode: 'development',
   devtool: false,
   output: {
-    publicPath: "/",
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -22,12 +22,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        loader: "babel-loader",
+        test: /\.(jsx|js|ts|tsx)?$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        options: {
-          presets: ["@babel/preset-react"],
-        },
       },
     ],
   },
@@ -35,12 +32,12 @@ module.exports = {
     new ModuleFederationPlugin({
       // name: "app2",
       // remoteType: "var",
-      // 這樣寫的話，html 裡 載入 script 
+      // 這樣寫的話，html 裡 載入 script
       /* remotes: {
         app1: "app1",
       }, */
       remotes: {
-        app1: "app1@http://localhost:9527/remoteEntry.js",
+        app1: 'app1@http://localhost:9527/remoteEntry.js',
       },
       // https://stackoverflow.com/questions/66123283/webpack-module-federation-is-not-working-with-eager-shared-libs
       shared: {
@@ -56,19 +53,19 @@ module.exports = {
           singleton: true,
           strictVersion: true,
           requiredVersion: deps['react-dom'],
-        }
+        },
       },
     }),
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: './public/index.html',
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     port: 3000,
   },
-  
-  /*
+
+  /* 這個不要加，不然 venders 載一次，remote 再載一次
   optimization: {
     splitChunks: {
       chunks: 'all',

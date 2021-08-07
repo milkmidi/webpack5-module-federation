@@ -1,17 +1,17 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ModuleFederationPlugin } = require("webpack").container;
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+const path = require('path');
 const deps = require('./package.json').dependencies;
 // https://github.com/nsebhastian/module-federation-react/blob/app2-complete/app2/webpack.config.js
 module.exports = {
-  entry: "./src/index",
-  mode: "development",
+  entry: './src/index',
+  mode: 'development',
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     port: 3001,
   },
   output: {
-    publicPath: "/",
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -22,18 +22,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        loader: "babel-loader",
+        test: /\.(ts|js|tsx|jsx)?$/,
+        loader: 'babel-loader',
         exclude: /node_modules/,
-        options: {
-          presets: ["@babel/preset-react"],
-        },
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: './public/index.html',
     }),
     new ModuleFederationPlugin({
       remoteType: 'var',
@@ -43,10 +40,11 @@ module.exports = {
       },
       shared: {
         ...Object.keys(deps).reduce((prev, key) => {
+          // eslint-disable-next-line no-param-reassign
           prev[key] = {
             eager: true,
             singleton: true,
-          }
+          };
           return prev;
         }, {}),
         /* '@emotion/css' :{ // 如果這裡有用到，然後 remote 也有用，就不會再載入 remote 的 emotion/css package
@@ -73,11 +71,11 @@ module.exports = {
           eager: true,
           singleton: true,
           // requiredVersion: deps['react-dom'],
-        }
+        },
       },
     }),
   ],
-  
+
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -92,5 +90,5 @@ module.exports = {
       },
     },
   },
-  //*/
+  //* /
 };

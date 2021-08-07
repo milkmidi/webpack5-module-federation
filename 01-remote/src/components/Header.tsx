@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { css } from '@emotion/css';
 
 const style = css`
@@ -19,26 +19,37 @@ const style = css`
   }
 `;
 
-const Header = (props) => {
-  const [count, setCount] = React.useState(props.initCount || 0);
+type HeaderProps = {
+  initCount?: number
+}
+
+const Header:React.FC<HeaderProps> = (props) => {
+  const {
+    initCount = 0,
+    children,
+  } = props;
+  const [count, setCount] = React.useState(initCount);
 
   React.useEffect(() => {
     const timeId = setInterval(() => {
-      setCount( prev => prev + 1);
+      setCount((prev) => prev + 1);
     }, 1000);
-    return ()=> {
+    return () => {
       clearInterval(timeId);
-    }
+    };
   }, []);
   return (
     <header className={style}>
-      <h2>Header, count:{count}</h2>
-      <button onClick={()=> setCount(count+1)}>increment</button>
+      <h2>
+        Header, count:
+        {count}
+      </h2>
+      <button onClick={() => setCount(count + 1)}>increment</button>
       {
-        props.children
+        children
       }
     </header>
-  )
+  );
 };
 
 export default React.memo(Header);
