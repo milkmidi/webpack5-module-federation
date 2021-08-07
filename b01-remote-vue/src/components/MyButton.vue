@@ -2,6 +2,7 @@
 /* eslint-disable no-plusplus */
 import { reactive } from 'vue';
 
+console.log('%cRemote MyButton', 'background: #222; color: #bada55');
 export default {
   props: {
     defaultValue: {

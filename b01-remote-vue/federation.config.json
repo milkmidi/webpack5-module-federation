@@ -1,6 +1,6 @@
 {
   "name": "app1",
   "exposes": {
-    "./MyModel": "./src/libs/MyModel.js"
+    "./MyModel": "./src/libs/MyModel.ts"
   }
 }

@@ -1,7 +1,7 @@
 <script>
 import { ref } from 'vue';
 
-console.log('Remote Header.vue');
+console.log('%cRemote Header', 'background: #222; color: #bada55');
 export default {
   props: {
     initValue: {

@@ -15,7 +15,9 @@
   },
   "devDependencies": {
     "@babel/core": "7.14.3",
+    "@babel/preset-typescript": "^7.15.0",
     "@pixability-ui/federated-types": "^0.1.0",
+    "@types/lodash": "^4.14.172",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.1.5",
     "babel-eslint": "^10.1.0",
