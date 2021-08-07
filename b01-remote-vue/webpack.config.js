@@ -58,8 +58,8 @@ module.exports = {
       },
       exposes: {
         // expose each component
-        './Header': './src/components/Header.vue',
-        './Button': './src/components/Button',
+        './MyHeader': './src/components/MyHeader.vue',
+        './MyButton': './src/components/MyButton.vue',
         './MyModel': './src/libs/MyModel',
       },
       /* shared: {

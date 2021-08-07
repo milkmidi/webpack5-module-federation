@@ -1,14 +1,15 @@
 <script>
-import { defineAsyncComponent } from 'vue';
-import MyModel from 'app1/MyModel';
-import Button from 'app1/Button';
 
-const RemoteHeader = defineAsyncComponent(() => import('app1/Header'));
+import { defineAsyncComponent } from 'vue';
+import MyModel, { add } from 'app1/MyModel';
+import MyButton from 'app1/MyButton';
+
+const RemoteMyHeader = defineAsyncComponent(() => import('app1/MyHeader'));
 
 export default {
   components: {
-    RemoteHeader,
-    Button,
+    RemoteMyHeader,
+    MyButton,
   },
   data() {
     return {
@@ -17,16 +18,17 @@ export default {
   },
   mounted() {
     console.log(MyModel);
-    this.name = MyModel.name;
+    console.log(add(1, 1));
+    // this.name = MyModel.name;
   },
 };
 </script>
 
 <template>
   <div id="app">
-    <RemoteHeader />
-    <RemoteHeader :init-value="10" />
-    <Button />
+    <RemoteMyHeader />
+    <RemoteMyHeader :init-value="10" />
+    <MyButton />
     <h1>name:{{ name }}</h1>
   </div>
 </template>

@@ -14,7 +14,7 @@ module.exports = {
   devtool: false,
   output: {
     publicPath: '/',
-    chunkFilename: 'remote-[name].js',
+    chunkFilename: 'host-[name].js',
   },
   module: {
     rules: [
@@ -80,6 +80,9 @@ module.exports = {
     host: '0.0.0.0',
   },
   optimization: {
+    // minimize: false,
+    moduleIds: 'named',
+    chunkIds: 'named',
     splitChunks: {
       chunks: 'all',
       cacheGroups: {

@@ -1,11 +1,12 @@
 <script>
-import Header from './components/Header.vue';
-import Button from './components/Button';
+import MyHeader from './components/MyHeader.vue';
+import MyButton from './components/MyButton.vue';
+import MyModel from './libs/MyModel';
 
 export default {
   components: {
-    Header,
-    Button,
+    MyHeader,
+    MyButton,
   },
   data() {
     return {
@@ -17,13 +18,16 @@ export default {
       console.log(newValue);
     },
   },
+  mounted() {
+    console.log(MyModel);
+  },
 };
 </script>
 
 <template>
   <div id="app">
-    <Header />
-    <Button
+    <MyHeader />
+    <MyButton
       data-name="MyButton"
       @click="value++"
     />
