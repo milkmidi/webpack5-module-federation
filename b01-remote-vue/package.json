@@ -6,7 +6,8 @@
     "start:watch": "webpack --mode development --watch",
     "build": "rimraf ./dist && webpack --mode production",
     "serve": "serve dist -p 9527",
-    "deploy": "rimraf ./dist && npm run build && npm run serve"
+    "deploy": "rimraf ./dist && npm run build && npm run serve",
+    "make-types": "make-federated-types --outputDir ./my_types"
   },
   "dependencies": {
     "lodash": "^4.17.21",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.14.3",
+    "@pixability-ui/federated-types": "^0.1.0",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.1.5",
     "babel-eslint": "^10.1.0",
@@ -29,6 +31,7 @@
     "rimraf": "^3.0.2",
     "serve": "11.3.2",
     "style-loader": "^2.0.0",
+    "typescript": "^4.3.5",
     "vue-loader": "^16.4.1",
     "vue-template-compiler": "^2.6.14",
     "webpack": "5.38.1",

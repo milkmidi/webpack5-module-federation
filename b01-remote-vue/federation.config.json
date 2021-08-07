@@ -1,0 +1,6 @@
+{
+  "name": "app1",
+  "exposes": {
+    "./MyModel": "./src/libs/MyModel.js"
+  }
+}
