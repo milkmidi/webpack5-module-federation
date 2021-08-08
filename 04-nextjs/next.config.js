@@ -7,7 +7,15 @@ module.exports = {
   future: { webpack5: true },
 
   webpack: (config, options) => {
-    console.log('webpack version:', options.webpack.version);
+    const { webpack, isServer } = options;
+    config.experiments = { topLevelAwait: true };
+
+    config.module.rules.push({
+      test: /_app.js/,
+      loader: "@module-federation/nextjs-mf/lib/federation-loader.js",
+    });
+
+
     const federationConfig = {
       remoteType: "var",
       remotes: {
@@ -27,13 +35,13 @@ module.exports = {
         }
       },
     };
-    if (!options.webpack.container) {
-      throw new Error("Module Federation only works with Webpack 5");
-    }
     config.plugins.push(
       new options.webpack.container.ModuleFederationPlugin(federationConfig)
     );
-
+    
+    if (!options.webpack.container) {
+      throw new Error("Module Federation only works with Webpack 5");
+    }
     return config;
   },
 };

@@ -16,7 +16,8 @@ module.exports = {
 
     config.plugins.push(
       new ModuleFederationPlugin({
-        name: 'host',
+        // name: 'host',
+        remoteType: 'var',
         remotes: {
           app1: 'app1',
           // app1: 'app1@http://localhost:9527/remoteEntry.js',
