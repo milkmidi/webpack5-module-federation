@@ -7,10 +7,9 @@ const deps = require('./package.json').dependencies;
 
 module.exports = {
   entry: {
-    app: './src/index',
+    index: './src/index',
   },
-  // mode: "production",
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   devtool: false,
   output: {
     publicPath: 'http://localhost:9527/',
@@ -53,9 +52,6 @@ module.exports = {
       // library: { type: "var", name: "app1" },
       // library: { type: "umd", name: "app1" },
       filename: 'remoteEntry.js',
-      remotes: {
-        app1: 'app1',
-      },
       exposes: {
         // expose each component
         './MyHeader': './src/components/MyHeader.vue',
@@ -100,7 +96,7 @@ module.exports = {
 
   // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
   optimization: {
-    minimize: false,
+    minimize: process.env.NODE_ENV === 'production',
     moduleIds: 'named',
     chunkIds: 'named',
     /*

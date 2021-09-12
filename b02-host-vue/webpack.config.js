@@ -7,7 +7,7 @@ const deps = require('./package.json').dependencies;
 
 module.exports = {
   entry: {
-    app: './src/index',
+    'host-index': './src/index',
   },
   // mode: "production",
   mode: 'development',
@@ -62,7 +62,7 @@ module.exports = {
       shared: {
         ...deps, // 這個加了比較好
         vue: {
-          // eager: true, // 這不要開，因為設定 ture 的話，會先把有用到的 node_modules 都先包裡來
+          eager: true, // 這個開不開沒差
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
           requiredVersion: deps.vue,
@@ -83,7 +83,7 @@ module.exports = {
     // minimize: false,
     moduleIds: 'named',
     chunkIds: 'named',
-    splitChunks: {
+    /* splitChunks: { // 不能包 vendor, 不然 remote 會載一次，這裡也會載一次
       chunks: 'all',
       cacheGroups: {
         vendors: {
@@ -94,6 +94,6 @@ module.exports = {
           enforce: true,
         },
       },
-    },
+    }, */
   },
 };

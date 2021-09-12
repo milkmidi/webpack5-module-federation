@@ -2,9 +2,9 @@
   "name": "module-federation-starter",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve --mode production",
-    "start:watch": "webpack --mode development --watch",
-    "build": "rimraf ./dist && webpack --mode production",
+    "start": "cross-env NODE_ENV=development webpack serve",
+    "start:watch": "cross-env NODE_ENV=development webpack --watch",
+    "build": "rimraf ./dist && cross-env NODE_ENV=production webpack",
     "serve": "serve dist -p 9527",
     "deploy": "rimraf ./dist && npm run build && npm run serve",
     "make-types": "make-federated-types --outputDir ./my_types"
@@ -23,6 +23,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "8.2.2",
     "bundle-loader": "0.5.6",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.6",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",

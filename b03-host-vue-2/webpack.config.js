@@ -28,7 +28,7 @@ module.exports = {
       {
         test: /\.js?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.css?$/,
@@ -54,7 +54,7 @@ module.exports = {
         app1: 'app1',
       },
       shared: {
-        ...deps, // 這個加了比較好
+        // ...deps, // 這個加了比較好
         vue: {
           eager: true, // 要打開才能用, 不然會有 : Shared module is not available for eager consumption:
           singleton: true,
@@ -77,7 +77,7 @@ module.exports = {
     // minimize: false,
     moduleIds: 'named',
     chunkIds: 'named',
-    splitChunks: {
+    splitChunks: { // 可以開 vendors
       chunks: 'all',
       cacheGroups: {
         vendors: {
