@@ -5,6 +5,7 @@ export const add = (a:number, b:number):number => a + b;
 
 const config = {
   name: 'milkmidi',
+  value: '發大財',
 };
 
 export const getData = () => _.get(config, 'name');

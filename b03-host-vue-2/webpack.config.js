@@ -51,7 +51,7 @@ module.exports = {
     new ModuleFederationPlugin({
       remoteType: 'var',
       remotes: {
-        app1: 'app1',
+        milkmidiLibrary: 'milkmidiLibrary',
       },
       shared: {
         // ...deps, // 這個加了比較好

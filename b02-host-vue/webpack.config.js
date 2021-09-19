@@ -57,7 +57,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
       remotes: {
-        app1: 'app1@http://localhost:9527/remoteEntry.js',
+        milkmidiLibrary: 'milkmidiLibrary@http://localhost:9527/remoteEntry.js',
       },
       shared: {
         ...deps, // 這個加了比較好

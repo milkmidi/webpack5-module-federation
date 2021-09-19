@@ -48,7 +48,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
-      name: 'app1',
+      name: 'milkmidiLibrary',
       // library: { type: "var", name: "app1" },
       // library: { type: "umd", name: "app1" },
       filename: 'remoteEntry.js',

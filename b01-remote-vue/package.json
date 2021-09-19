@@ -1,13 +1,12 @@
 {
-  "name": "module-federation-starter",
+  "name": "module-federation-remote",
   "version": "1.0.0",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve",
     "start:watch": "cross-env NODE_ENV=development webpack --watch",
     "build": "rimraf ./dist && cross-env NODE_ENV=production webpack",
     "serve": "serve dist -p 9527",
-    "deploy": "rimraf ./dist && npm run build && npm run serve",
-    "make-types": "make-federated-types --outputDir ./my_types"
+    "deploy": "rimraf ./dist && npm run build && npm run serve"
   },
   "dependencies": {
     "lodash": "^4.17.21",
@@ -16,7 +15,6 @@
   "devDependencies": {
     "@babel/core": "7.14.3",
     "@babel/preset-typescript": "^7.15.0",
-    "@pixability-ui/federated-types": "^0.1.0",
     "@types/lodash": "^4.14.172",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.1.5",

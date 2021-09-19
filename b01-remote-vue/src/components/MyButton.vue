@@ -32,6 +32,8 @@ export default {
 
 <style scoped>
 button {
+  display: block;
+  margin: 12px 0;
   padding: 10px;
   background-color: rgb(177, 38, 70);
   color:black;

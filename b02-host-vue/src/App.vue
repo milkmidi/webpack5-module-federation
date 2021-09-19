@@ -1,24 +1,20 @@
 <script>
-
 import { defineAsyncComponent } from 'vue';
-import MyModel, { add } from 'app1/MyModel';
-import MyButton from 'app1/MyButton';
+import MyModel, { add } from 'milkmidiLibrary/MyModel';
+import MyButton from 'milkmidiLibrary/MyButton';
+import _ from 'lodash';
 
-const RemoteMyHeader = defineAsyncComponent(() => import('app1/MyHeader'));
+const RemoteMyHeader = defineAsyncComponent(() => import('milkmidiLibrary/MyHeader'));
 
 export default {
   components: {
     RemoteMyHeader,
     MyButton,
   },
-  data() {
-    return {
-      name: 'default',
-    };
-  },
   mounted() {
     console.log(MyModel);
-    console.log(add(1, 1));
+    console.log('MyModel.add(1,1) = ', add(1, 1));
+    console.log('host lodash', _.add(1, 1));
     // this.name = MyModel.name;
   },
 };
@@ -26,9 +22,18 @@ export default {
 
 <template>
   <div id="app">
+    <h1>Host</h1>
     <RemoteMyHeader />
-    <RemoteMyHeader :init-value="10" />
     <MyButton />
-    <h1>name:{{ name }}</h1>
+    <MyButton :default-value="10" />
   </div>
 </template>
+
+<style scoped>
+#app {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+  background-color: black;
+  color: white;
+}
+</style>

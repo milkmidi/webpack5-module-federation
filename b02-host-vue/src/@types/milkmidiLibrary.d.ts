@@ -1,15 +1,16 @@
-declare module 'app1/MyModel' {
+declare module 'milkmidiLibrary/MyModel' {
 
   export declare const add: (a: number, b: number) => number;
 
   declare const config: {
     name: string;
+    value: string;
   };
   export declare const getData: () => any;
   export default config;
 }
 
-declare module 'app1/MyHeader' {
+declare module 'milkmidiLibrary/MyHeader' {
   type HeaderProps = {
     initValue: {
       type: NumberConstructor;
@@ -22,7 +23,7 @@ declare module 'app1/MyHeader' {
   export default component
 }
 
-declare module 'app1/MyButton' {
+declare module 'milkmidiLibrary/MyButton' {
   type MyButtonProps = {
     defaultValue?: {
       type: NumberConstructor;

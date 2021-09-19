@@ -8,16 +8,6 @@ export default {
     MyHeader,
     MyButton,
   },
-  data() {
-    return {
-      value: 0,
-    };
-  },
-  watch: {
-    value(newValue) {
-      console.log(newValue);
-    },
-  },
   mounted() {
     console.log(MyModel);
   },
@@ -25,12 +15,7 @@ export default {
 </script>
 
 <template>
-  <div id="app">
-    <MyHeader />
-    <MyButton
-      data-name="MyButton"
-      @click="value++"
-    />
-    <h1>value:{{ value }}</h1>
-  </div>
+  <MyHeader />
+  <MyButton />
+  <MyButton :default-value="10" />
 </template>
