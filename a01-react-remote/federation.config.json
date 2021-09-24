@@ -1,0 +1,9 @@
+{
+  "name": "app1",
+  "exposes": {
+    "./Header": "./src/components/Header",
+    "./Footer": "./src/components/Footer",
+    "./EmotionReactComponent": "./src/components/EmotionReactComponent",
+    "./MyModel": "./src/libs/MyModel"
+  }
+}
