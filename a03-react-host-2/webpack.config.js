@@ -39,14 +39,14 @@ module.exports = {
         // app1: 'app@window.app1'
       },
       shared: {
-        ...Object.keys(deps).reduce((prev, key) => {
+        /* ...Object.keys(deps).reduce((prev, key) => {
           // eslint-disable-next-line no-param-reassign
           prev[key] = {
             eager: true,
             singleton: true,
           };
           return prev;
-        }, {}),
+        }, {}), */
         /* '@emotion/css' :{ // 如果這裡有用到，然後 remote 也有用，就不會再載入 remote 的 emotion/css package
           eager: true,
           singleton: true,
@@ -63,12 +63,12 @@ module.exports = {
           // strictVersion: true,
         }, */
         react: {
-          eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
+          // eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
           singleton: true,
           // requiredVersion: deps.react,
         },
         'react-dom': {
-          eager: true,
+          // eager: true,
           singleton: true,
           // requiredVersion: deps['react-dom'],
         },
