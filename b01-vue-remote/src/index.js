@@ -1,3 +1,9 @@
 import('./bootstrap');
 
-// 如果 edger 為 ture, 就不需要一個 import('./bootstrap')
+// 只要有開 shared 就需要 import('./bootstrap')
+
+// import { createApp } from 'vue';
+// import App from './App.vue';
+
+// createApp(App)
+//   .mount('#root');

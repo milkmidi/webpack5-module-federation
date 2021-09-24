@@ -95,20 +95,18 @@ module.exports = {
     minimize: process.env.NODE_ENV === 'production',
     moduleIds: 'named',
     chunkIds: 'named',
-    /*
-    // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
-    splitChunks: {
+
+    // 為了 demo, 所以把每個 chunk 都獨立出來，production 不要這樣設定
+    /* splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        vendors: {
-          name: 'vendors',
-          chunks: 'all',
-          test: /[\\/]node_modules[\\/]/,
-          priority: 10,
+        default: {
+          minChunks: 1,
+          priority: -20,
+          minSize: 0,
           enforce: true,
         },
       },
-    },
-    // */
+    }, */
   },
 };

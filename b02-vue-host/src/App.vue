@@ -2,7 +2,6 @@
 import { defineAsyncComponent } from 'vue';
 import _ from 'lodash';
 
-// 有使用 bootstrap 引導寫法的話，可以直接使用 import, 超爽
 import MyModel, { add } from 'milkmidiLibrary/MyModel';
 import MyButton from 'milkmidiLibrary/MyButton';
 import useData from 'milkmidiLibrary/useData';

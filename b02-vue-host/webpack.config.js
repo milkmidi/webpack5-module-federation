@@ -54,7 +54,7 @@ module.exports = {
       shared: {
         ...deps, // 這個加了比較好
         vue: {
-          eager: true, // 這個開不開沒差
+          eager: true, // 開了，就會先把 vue 包進 host-index 裡
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
           requiredVersion: deps.vue,
