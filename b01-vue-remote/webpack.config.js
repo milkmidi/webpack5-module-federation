@@ -48,8 +48,6 @@ module.exports = {
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
       name: 'milkmidiLibrary',
-      // library: { type: "var", name: "app1" },
-      // library: { type: "umd", name: "app1" },
       filename: 'remoteEntry.js',
       exposes: {
         // expose each component
@@ -58,23 +56,13 @@ module.exports = {
         './MyModel': './src/libs/MyModel',
         './useData': './src/hooks/useData',
       },
-      /* shared: {
-        react: {
-          requiredVersion: deps.react,
-          import: 'react', // the "react" package will be used a provided and fallback module
-          shareKey: 'react', // under this name the shared module will be placed in the share scope
-          shareScope: 'default', // share scope with this name will be used
-          singleton: true, // only a single version of the shared module is allowed
-        },
-        'react-dom': {
-          requiredVersion: deps['react-dom'],
-          singleton: true, // only a single version of the shared module is allowed
-        },
-      } */
       shared: {
         ...deps, // 這個加了比較好
         vue: {
-          // eager: true, // 這不要開，因為設定 ture 的話，會先把有用到的 node_modules 都先包裡來
+          // 這個參數是重點。ture 的話，會先把有用到的 node_modules 都先包裡來
+          // eager: true, // 奶綠覺得不要打開
+
+          // only a single version of the shared module is allowed
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
           requiredVersion: deps.vue,
