@@ -53,7 +53,7 @@ module.exports = {
         milkmidiLibrary: 'milkmidiLibrary',
       },
       shared: {
-        // ...deps, // 這個加了比較好
+        ...deps, // 這個加了比較好
         vue: {
           // 如果沒有 bootstrap, 就需要打開 eager
           eager: true, // 要打開才能用, 不然會有 : Shared module is not available for eager consumption:
@@ -76,7 +76,7 @@ module.exports = {
     // minimize: false,
     moduleIds: 'named',
     chunkIds: 'named',
-    splitChunks: { // 可以開 vendors
+    /* splitChunks: { // 可以開 vendors
       chunks: 'all',
       cacheGroups: {
         vendors: {
@@ -87,6 +87,6 @@ module.exports = {
           enforce: true,
         },
       },
-    },
+    }, */
   },
 };

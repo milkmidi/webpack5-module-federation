@@ -2,7 +2,8 @@
 /* eslint-disable no-plusplus */
 import { reactive } from 'vue';
 
-console.log('%cmilkmidiLibrary MyButton', 'background: #222; color: #bada55');
+console.log('%cMyButton.vue', 'background:#2ecc71;color:white;font-size:20px;');
+
 export default {
   props: {
     defaultValue: {

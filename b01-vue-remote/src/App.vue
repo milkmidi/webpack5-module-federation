@@ -1,42 +1,43 @@
 <script>
-import MyHeader from './components/MyHeader.vue';
 import MyButton from './components/MyButton.vue';
 import MyModel from './libs/MyModel';
+import useDataWithLodash from './hooks/useDataWithLodash';
 
-import useData from './hooks/useData';
-
+console.log('%cApp.vue', 'background:#2ecc71;color:white;font-size:20px;');
 export default {
   components: {
-    MyHeader,
     MyButton,
   },
   setup() {
-    const state = useData();
+    const state = useDataWithLodash();
     return {
       state,
     };
   },
   mounted() {
-    console.log(MyModel);
+    console.log('MyModel', MyModel);
   },
 };
 </script>
 
 <template>
   <div id="app">
-    <MyHeader />
+    <h1>PROVIDER</h1>
     <MyButton />
     <MyButton :default-value="10" />
     <section>
-      <pre>
-        {{ state }}
-      </pre>
+      <code>{{ state }}</code>
     </section>
   </div>
 </template>
 
 <style scoped>
+#app {
+  max-width: 640px;
+  margin: 0 auto;
+}
 section {
   border: 1px solid black;
+  padding: 5px;
 }
 </style>

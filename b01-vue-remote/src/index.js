@@ -1,3 +1,4 @@
+console.log('%cindex', 'background:#2ecc71;color:white;font-size:20px;');
 import('./bootstrap');
 
 // 只要有開 shared 就需要 import('./bootstrap')

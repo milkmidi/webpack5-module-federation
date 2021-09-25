@@ -1,20 +1,15 @@
 <script>
-// import loadComponent from './utils/loadComponent';
 import { defineAsyncComponent, reactive } from 'vue';
-
-// 有 bootstrap 的話，就可以這樣寫
-// import useData from 'milkmidiLibrary/useData';
+// 沒 bootstrap ，就不能這樣寫
 // import MyModel from 'milkmidiLibrary/MyModel';
-// 沒有的話，就需要 lazyload
+// 需要 lazyload
 import('milkmidiLibrary/MyModel').then((myModel) => {
-  // console.log(myModel.default);
+  console.log(myModel.default);
 });
-const MyHeader = defineAsyncComponent(() => import('milkmidiLibrary/MyHeader'));
 const MyButton = defineAsyncComponent(() => import('milkmidiLibrary/MyButton'));
 
 export default {
   components: {
-    MyHeader,
     MyButton,
   },
   setup() {
@@ -22,7 +17,8 @@ export default {
       data: undefined,
       isLoading: false,
     });
-    import('milkmidiLibrary/useData').then((module) => {
+    // 這裡會無解
+    import('milkmidiLibrary/useDataWithLodash').then((module) => {
       const result = module.default();
       console.log(result);
       state.isLoading = result.isLoading;
@@ -37,8 +33,7 @@ export default {
 
 <template>
   <div id="app">
-    <h1>Host2</h1>
-    <MyHeader />
+    <h1>Host C</h1>
     <MyButton />
     <h3>{{ state }}</h3>
   </div>

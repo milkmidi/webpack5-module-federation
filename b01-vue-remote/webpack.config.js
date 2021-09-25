@@ -3,16 +3,16 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const { VueLoaderPlugin } = require('vue-loader');
 const deps = require('./package.json').dependencies;
 
-// https://www.qiyuandi.com/zhanzhang/zonghe/12450.html
 module.exports = {
   entry: {
-    'remote-index': './src/index',
+    'PROVIDER-index': './src/index',
   },
   mode: process.env.NODE_ENV,
   devtool: false,
   output: {
+    // TODO 3
     publicPath: 'http://localhost:9527/',
-    chunkFilename: 'remote-[name].js',
+    chunkFilename: 'PROVIDER-[name].js',
   },
   module: {
     rules: [
@@ -39,6 +39,30 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
+      {
+        // https://webpack.js.org/guides/asset-modules/
+        // https://webpack.docschina.org/guides/asset-modules/
+        test: /\.(png|jpg|gif|svg|ico)$/,
+        oneOf: [
+          {
+            type: 'asset/inline',
+            resourceQuery: /inline/,
+            parser: {
+              dataUrlCondition: {
+                maxSize: 99999999,
+              },
+            },
+          },
+          {
+            type: 'asset/resource',
+            parser: {
+              dataUrlCondition: {
+                maxSize: 1024 * 2, // 2kb
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -47,26 +71,28 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
+      // TODO-----------------------  1 {
       name: 'milkmidiLibrary',
       filename: 'remoteEntry.js',
       exposes: {
         // expose each component
-        './MyHeader': './src/components/MyHeader.vue',
         './MyButton': './src/components/MyButton.vue',
         './MyModel': './src/libs/MyModel',
-        './useData': './src/hooks/useData',
+        './useDataWithLodash': './src/hooks/useDataWithLodash',
       },
+      // TODO-----------------------  1 }
       shared: {
+        // TODO-----------------------  2 {
         ...deps, // 這個加了比較好
         vue: {
           // 這個參數是重點。ture 的話，會先把有用到的 node_modules 都先包裡來
           // eager: true, // 奶綠覺得不要打開
-
           // only a single version of the shared module is allowed
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
           requiredVersion: deps.vue,
         },
+        // TODO-----------------------  2 }
       },
     }),
     new HtmlWebpackPlugin({
@@ -85,16 +111,18 @@ module.exports = {
     chunkIds: 'named',
 
     // 為了 demo, 所以把每個 chunk 都獨立出來，production 不要這樣設定
-    /* splitChunks: {
-      chunks: 'all',
+    //*
+    splitChunks: {
+      // chunks: 'all',
       cacheGroups: {
         default: {
           minChunks: 1,
-          priority: -20,
-          minSize: 0,
+          // priority: -20,
+          // minSize: 0,
           enforce: true,
         },
       },
-    }, */
+    },
+    // */
   },
 };

@@ -52,9 +52,9 @@ module.exports = {
         milkmidiLibrary: 'milkmidiLibrary@http://localhost:9527/remoteEntry.js',
       },
       shared: {
-        ...deps, // 這個加了比較好
+        // ...deps, // 這個加了比較好
         vue: {
-          eager: true, // 開了，就會先把 vue 包進 host-index 裡
+          // eager: true, // 開了，就會先把 vue 包進 host-index 裡
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
           requiredVersion: deps.vue,
