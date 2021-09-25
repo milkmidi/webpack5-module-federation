@@ -9,7 +9,6 @@ const config = {
 };
 
 export const getData = ():string => {
-  // return $;
   return _.get(config, 'name');
 };
 export default config;

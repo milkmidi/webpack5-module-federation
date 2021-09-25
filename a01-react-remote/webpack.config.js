@@ -2,15 +2,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const path = require('path');
 const deps = require('./package.json').dependencies;
-const federationConfig = require('./federation.config.json');
+// const federationConfig = require('./federation.config.json');
 // https://www.qiyuandi.com/zhanzhang/zonghe/12450.html
 
 module.exports = {
-  /* entry: {
-    app: "./src/index",
-  }, */
-  // mode: "production",
-  mode: 'development',
+  entry: {
+    remoteIndex: './src/index',
+  },
+  mode: process.env.NODE_ENV,
   devtool: false,
   output: {
     publicPath: 'http://localhost:9527/',
@@ -40,13 +39,15 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      ...federationConfig,
-      // library: { type: "var", name: "app1" },
-      // library: { type: "umd", name: "app1" },
-      filename: 'remoteEntry.js',
-      remotes: {
-        app1: 'app1',
+      name: 'app1',
+      exposes: {
+        './Header': './src/components/Header',
+        './Footer': './src/components/Footer',
+        './EmotionReactComponent': './src/components/EmotionReactComponent',
+        './MyModel': './src/libs/MyModel',
+        './SimpleModel': './src/libs/SimpleModel',
       },
+      filename: 'remoteEntry.js',
       /* shared: {
         react: {
           requiredVersion: deps.react,
@@ -62,7 +63,7 @@ module.exports = {
       } */
       shared: {
         ...deps, // 這個加了比較好
-        /* '@emotion/css' :{
+        /* '@emotion/css': {
           eager: true,
           singleton: true,
           strictVersion: true,

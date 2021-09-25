@@ -1,16 +1,11 @@
 import { reactive, onMounted } from 'vue';
-import axios from 'axios';
+import _ from 'lodash';
 
-type TodoType = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+console.log('%cuseDataWithLodash', 'background:#2ecc71;color:white;font-size:20px;');
 
 export type UseFetchDataType = {
   isLoading : boolean;
-  data?: TodoType;
+  data?: string;
 }
 
 const useFetchData = ():UseFetchDataType => {
@@ -20,8 +15,7 @@ const useFetchData = ():UseFetchDataType => {
   });
   onMounted(async () => {
     state.isLoading = true;
-    const { data } = await axios.get<TodoType>('https://jsonplaceholder.typicode.com/todos/1');
-    state.data = data;
+    state.data = _.get({ name: 'milkmidi' }, 'name');
     state.isLoading = false;
   });
   return state;
