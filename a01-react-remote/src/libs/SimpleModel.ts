@@ -1,5 +1,5 @@
-const data = {
+const config = {
   name: 'milkmidi',
 };
 
-export default data;
+export default config;

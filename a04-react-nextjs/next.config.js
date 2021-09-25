@@ -10,10 +10,10 @@ module.exports = {
     const { webpack, isServer } = options;
     config.experiments = { topLevelAwait: true };
 
-    config.module.rules.push({
+    /* config.module.rules.push({
       test: /_app.js/,
       loader: "@module-federation/nextjs-mf/lib/federation-loader.js",
-    });
+    }); */
 
 
     const federationConfig = {

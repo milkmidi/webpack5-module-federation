@@ -46,6 +46,7 @@ module.exports = {
         './EmotionReactComponent': './src/components/EmotionReactComponent',
         './MyModel': './src/libs/MyModel',
         './SimpleModel': './src/libs/SimpleModel',
+        './useCounter': './src/hooks/useCounter',
       },
       filename: 'remoteEntry.js',
       /* shared: {

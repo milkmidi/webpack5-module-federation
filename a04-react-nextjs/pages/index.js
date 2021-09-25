@@ -9,12 +9,17 @@ const RemoteFooter = dynamic(()=> import('app1/RemoteFooter'), {
   ssr: false
 });
 
-if (process.browser) {
+// import SimpleModel from 'app1/SimpleModel'
+
+
+ if (process.browser) {
+
+  
   loadComponent('app1','./MyModel').then((rr) => {
     console.log(rr.add(1,1));
     console.log(rr.default);
   })
-}
+} 
 
 export default function Home() {
   const [count, setCount] = React.useState(0)
