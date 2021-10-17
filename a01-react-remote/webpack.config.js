@@ -63,7 +63,7 @@ module.exports = {
         },
       } */
       shared: {
-        ...deps, // 這個加了比較好
+        // ...deps, // 這個加了比較好
         /* '@emotion/css': {
           eager: true,
           singleton: true,
@@ -101,7 +101,7 @@ module.exports = {
 
   // 不要把 vendors 起成一包，不然 remoteEntry 會再整包載入
   optimization: {
-    minimize: false,
+    // minimize: false,
     moduleIds: 'named',
     chunkIds: 'named',
     /*

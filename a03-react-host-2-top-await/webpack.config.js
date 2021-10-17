@@ -6,9 +6,7 @@ const deps = require('./package.json').dependencies;
 module.exports = {
   entry: './src/index',
   mode: 'development',
-  devServer: {
-    port: 3000,
-  },
+  devtool: false,
   output: {
     publicPath: '/',
   },
@@ -62,20 +60,19 @@ module.exports = {
           // strictVersion: true,
         }, */
         react: {
-          // eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
+          eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
           singleton: true,
           // requiredVersion: deps.react,
         },
         'react-dom': {
-          // eager: true,
+          eager: true,
           singleton: true,
           // requiredVersion: deps['react-dom'],
         },
       },
     }),
   ],
-
-  optimization: {
+  /* optimization: {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
@@ -88,6 +85,11 @@ module.exports = {
         },
       },
     },
+  }, */
+  devServer: {
+    port: 3000,
   },
-  //* /
+  experiments: {
+    topLevelAwait: true,
+  },
 };
