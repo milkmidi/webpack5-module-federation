@@ -6,7 +6,7 @@ const deps = require('./package.json').dependencies;
 // https://www.qiyuandi.com/zhanzhang/zonghe/12450.html
 
 module.exports = {
-  entry: {
+  entry: process.env.APP_ENV === 'production' ? {} : {
     remoteIndex: './src/index',
   },
   mode: process.env.NODE_ENV,
@@ -43,10 +43,9 @@ module.exports = {
       exposes: {
         './Header': './src/components/Header',
         './Footer': './src/components/Footer',
-        './EmotionReactComponent': './src/components/EmotionReactComponent',
         './MyModel': './src/libs/MyModel',
         './SimpleModel': './src/libs/SimpleModel',
-        './useCounter': './src/hooks/useCounter',
+        // './useCounter': './src/hooks/useCounter',
       },
       filename: 'remoteEntry.js',
       /* shared: {
@@ -63,7 +62,8 @@ module.exports = {
         },
       } */
       shared: {
-        // ...deps, // 這個加了比較好
+        ...deps, // 這個加了比較好
+        // '@emotion/css': {},
         /* '@emotion/css': {
           eager: true,
           singleton: true,
@@ -78,13 +78,13 @@ module.exports = {
           // eager: true, // 這不要開，因為設定 ture 的話，會先把有用到的 node_modules 都先包裡來
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
-          requiredVersion: deps.react,
+          // requiredVersion: deps.react,
         },
         'react-dom': {
           // eager: true,
           singleton: true,
           // strictVersion: true,
-          requiredVersion: deps['react-dom'],
+          // requiredVersion: deps['react-dom'],
         },
       },
     }),
@@ -94,7 +94,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
     port: 9527,
   },
   // https://webpack.js.org/configuration/optimization/

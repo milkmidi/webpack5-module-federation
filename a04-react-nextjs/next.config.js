@@ -3,18 +3,14 @@ const {
   dependencies: deps,
 } = require('./package.json');
 
+/**
+ * @type {import('next').NextConfig}
+ */
 module.exports = {
-  future: { webpack5: true },
-
+  webpack5: true,
   webpack: (config, options) => {
     const { webpack, isServer } = options;
     config.experiments = { topLevelAwait: true };
-
-    /* config.module.rules.push({
-      test: /_app.js/,
-      loader: "@module-federation/nextjs-mf/lib/federation-loader.js",
-    }); */
-
 
     const federationConfig = {
       remoteType: "var",
@@ -23,15 +19,18 @@ module.exports = {
         // app1: "app1@http://localhost:9527/remoteEntry.js",
       },
       shared: {
+        lodash: {
+          eager: true,
+        },
         react: {
           eager: true,
-          singleton: true,
-          requiredVersion: deps.react,
+          // singleton: true,
+          // requiredVersion: deps.react,
         },
         'react-dom': {
           eager: true,
-          singleton: true,
-          requiredVersion: deps['react-dom'],
+          // singleton: true,
+          // requiredVersion: deps['react-dom'],
         }
       },
     };

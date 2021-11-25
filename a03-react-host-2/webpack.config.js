@@ -4,11 +4,10 @@ const path = require('path');
 const deps = require('./package.json').dependencies;
 // https://github.com/nsebhastian/module-federation-react/blob/app2-complete/app2/webpack.config.js
 module.exports = {
-  entry: './src/index',
-  mode: 'development',
-  devServer: {
-    port: 3000,
+  entry: {
+    main: './src/index',
   },
+  mode: 'development',
   output: {
     publicPath: '/',
   },
@@ -38,20 +37,15 @@ module.exports = {
         // app1: 'app@window.app1'
       },
       shared: {
-        /* ...Object.keys(deps).reduce((prev, key) => {
+        ...Object.keys(deps).reduce((prev, key) => {
           // eslint-disable-next-line no-param-reassign
           prev[key] = {
             eager: true,
             singleton: true,
           };
           return prev;
-        }, {}), */
-        /* '@emotion/css' :{ // 如果這裡有用到，然後 remote 也有用，就不會再載入 remote 的 emotion/css package
-          eager: true,
-          singleton: true,
-          strictVersion: true,
-        },
-        '@emotion/react' :{
+        }, {}),
+        /* '@emotion/css': {
           eager: true,
           // singleton: true,
           // strictVersion: true,
@@ -62,19 +56,18 @@ module.exports = {
           // strictVersion: true,
         }, */
         react: {
-          // eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
+          eager: true, // 如果有用 import('bootstrap'), 就不需要 eager: true
           singleton: true,
           // requiredVersion: deps.react,
         },
         'react-dom': {
-          // eager: true,
+          eager: true,
           singleton: true,
           // requiredVersion: deps['react-dom'],
         },
       },
     }),
   ],
-
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -89,5 +82,7 @@ module.exports = {
       },
     },
   },
-  //* /
+  devServer: {
+    port: 3000,
+  },
 };
