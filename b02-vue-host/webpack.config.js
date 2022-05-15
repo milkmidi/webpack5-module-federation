@@ -49,7 +49,8 @@ module.exports = {
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
       remotes: {
-        milkmidiLibrary: 'milkmidiLibrary@http://localhost:9527/remoteEntry.js',
+        milkmidiLibrary: 'milkmidiLibrary@http://localhost:9527/remoteEntry.js?_v_=1.0.0',
+        // https://webpack.js.org/concepts/module-federation/
       },
       shared: {
         // ...deps, // 這個加了比較好

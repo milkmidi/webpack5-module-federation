@@ -84,9 +84,12 @@ module.exports = {
       shared: {
         // TODO-----------------------  2 {
         ...deps, // 這個加了比較好
+        lodash: {
+          eager: true,
+        },
         vue: {
           // 這個參數是重點。ture 的話，會先把有用到的 node_modules 都先包裡來
-          // eager: true, // 奶綠覺得不要打開
+          eager: true, // 奶綠覺得不要打開
           // only a single version of the shared module is allowed
           singleton: true,
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
