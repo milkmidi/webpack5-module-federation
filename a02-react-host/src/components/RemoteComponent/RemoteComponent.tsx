@@ -3,7 +3,7 @@ import React from 'react';
 
 const Header = React.lazy(() => import('app1/Header'));
 const Footer = React.lazy(() => import('app1/Footer'));
-const EmotionReactComponent = React.lazy(() => import('app1/EmotionReactComponent'));
+// const EmotionReactComponent = React.lazy(() => import('app1/EmotionReactComponent'));
 
 export default function RemoteComponent():JSX.Element {
   return (
@@ -14,9 +14,9 @@ export default function RemoteComponent():JSX.Element {
       <React.Suspense fallback="Loading header">
         <Footer />
       </React.Suspense>
-      <React.Suspense fallback="Loading header">
+      {/* <React.Suspense fallback="Loading header">
         <EmotionReactComponent />
-      </React.Suspense>
+      </React.Suspense> */}
     </div>
   );
 }

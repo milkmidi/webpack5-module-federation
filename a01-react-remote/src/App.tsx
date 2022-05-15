@@ -3,7 +3,7 @@ import useCounter from './hooks/useCounter';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-export default function App():JSX.Element {
+const App = () => {
   const { count } = useCounter();
   return (
     <div className="app">
@@ -15,4 +15,5 @@ export default function App():JSX.Element {
       <Footer />
     </div>
   );
-}
+};
+export default App;

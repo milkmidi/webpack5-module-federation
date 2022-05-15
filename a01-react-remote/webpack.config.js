@@ -80,7 +80,7 @@ module.exports = {
           // strictVersion: true, // 開了 host 和 remote 就會需要一樣的版本
           // requiredVersion: deps.react,
         },
-        'react-dom': {
+        'react-dom/client': {
           // eager: true,
           singleton: true,
           // strictVersion: true,

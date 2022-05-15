@@ -48,7 +48,7 @@ module.exports = {
           strictVersion: true,
           // requiredVersion: deps.react,
         },
-        'react-dom': {
+        'react-dom/client': {
           // eager: true,
           // singleton: true,
           strictVersion: true,
