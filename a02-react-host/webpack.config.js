@@ -41,18 +41,18 @@ module.exports = {
       },
       // https://stackoverflow.com/questions/66123283/webpack-module-federation-is-not-working-with-eager-shared-libs
       shared: {
-        ...deps,
+        // ...deps,
         react: {
           // eager: true, // host 端加不加都沒差
-          singleton: true,
+          // singleton: true,
           strictVersion: true,
-          requiredVersion: deps.react,
+          // requiredVersion: deps.react,
         },
-        'react-dom': {
+        'react-dom/client': {
           // eager: true,
-          singleton: true,
+          // singleton: true,
           strictVersion: true,
-          requiredVersion: deps['react-dom'],
+          // requiredVersion: deps['react-dom'],
         },
       },
     }),
@@ -61,7 +61,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
     port: 3000,
   },
 

@@ -1,15 +1,19 @@
 import React from 'react';
+import useCounter from './hooks/useCounter';
 import Header from './components/Header';
-// import Footer from './components/Footer';
-// import EmotionReactComponent from './components/EmotionReactComponent';
+import Footer from './components/Footer';
 
-export default function App():JSX.Element {
+const App = () => {
+  const { count } = useCounter();
   return (
     <div className="app">
-      <h1>Remote</h1>
+      <h1>
+        Remote, count:
+        {count}
+      </h1>
       <Header />
-      {/* <Footer /> */}
-      {/* <EmotionReactComponent /> */}
+      <Footer />
     </div>
   );
-}
+};
+export default App;
